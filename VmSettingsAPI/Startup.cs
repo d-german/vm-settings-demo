@@ -3,6 +3,8 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Newtonsoft.Json;
+using VmSettingsAPI.Services;
 
 namespace VmSettingsAPI
 {
@@ -18,7 +20,12 @@ namespace VmSettingsAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            services.AddMvcCore()
+                .SetCompatibilityVersion(CompatibilityVersion.Version_2_2)
+                .AddJsonOptions(options => { options.SerializerSettings.NullValueHandling = NullValueHandling.Include; })
+                .AddJsonFormatters();;
+
+            services.AddSingleton<IVmSettingService, LocalJsonVmSettingService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
