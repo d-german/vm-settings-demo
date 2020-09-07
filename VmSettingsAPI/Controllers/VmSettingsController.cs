@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
+using VmSettingsAPI.Models;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -11,16 +12,19 @@ namespace VmSettingsAPI.Controllers
     {
         // GET: api/<VmSettingsController>
         [HttpGet]
-        public IEnumerable<string> Get()
+        public ActionResult<VmSetting> Get()
         {
-            return new string[] { "value1", "value2" };
+            return new VmSetting();
         }
 
-        // POST api/<VmSettingsController>
-        [HttpPost]
-        public void Post([FromBody] string value)
+        // PUT api/<VmSettingsController>
+        [HttpPut]
+        public ActionResult<VmSetting> Post([FromBody] VmSetting value)
         {
+            return value;
         }
+
+
 
     }
 }
