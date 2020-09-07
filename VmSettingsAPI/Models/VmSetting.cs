@@ -4,6 +4,7 @@
     {
         public string VmName { get; set; }
         public Display Display { get; set; }
+
         public Storage Storage { get; set; }
         // other settings
     }

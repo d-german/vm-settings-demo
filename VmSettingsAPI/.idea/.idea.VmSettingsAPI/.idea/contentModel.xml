@@ -28,7 +28,10 @@
       </e>
       <e p="Services" t="Include">
         <e p="IVmSettingService.cs" t="Include" />
+        <e p="IVmSettingValidatorService.cs" t="Include" />
         <e p="LocalJsonVmSettingService.cs" t="Include" />
+        <e p="ValidationRule.cs" t="Include" />
+        <e p="VmSettingValidatorService.cs" t="Include" />
       </e>
       <e p="Startup.cs" t="Include" />
       <e p="vmSetting.json" t="Include" />

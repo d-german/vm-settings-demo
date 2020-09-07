@@ -23,18 +23,16 @@ namespace VmSettingsAPI
             services.AddMvcCore()
                 .SetCompatibilityVersion(CompatibilityVersion.Version_2_2)
                 .AddJsonOptions(options => { options.SerializerSettings.NullValueHandling = NullValueHandling.Include; })
-                .AddJsonFormatters();;
+                .AddJsonFormatters();
 
             services.AddSingleton<IVmSettingService, LocalJsonVmSettingService>();
+            services.AddSingleton<IVmSettingValidatorService, VmSettingValidatorService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-            }
+            if (env.IsDevelopment()) app.UseDeveloperExceptionPage();
 
             app.UseMvc();
         }

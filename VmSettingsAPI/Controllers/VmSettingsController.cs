@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System.Linq;
+using Microsoft.AspNetCore.Mvc;
 using VmSettingsAPI.Models;
 using VmSettingsAPI.Services;
 
@@ -11,10 +12,12 @@ namespace VmSettingsAPI.Controllers
     public class VmSettingsController : ControllerBase
     {
         private readonly IVmSettingService _vmSettingService;
+        private readonly IVmSettingValidatorService _vmSettingValidator;
 
-        public VmSettingsController(IVmSettingService vmSettingService)
+        public VmSettingsController(IVmSettingService vmSettingService, IVmSettingValidatorService vmSettingValidator)
         {
             _vmSettingService = vmSettingService;
+            _vmSettingValidator = vmSettingValidator;
         }
 
         // GET: api/<VmSettingsController>
@@ -28,6 +31,8 @@ namespace VmSettingsAPI.Controllers
         [HttpPut]
         public ActionResult<VmSetting> Post([FromBody] VmSetting value)
         {
+            var errors = _vmSettingValidator.Validate(value);
+            if (errors.Any()) return StatusCode(400, errors);
             _vmSettingService.Write(value);
             return value;
         }
