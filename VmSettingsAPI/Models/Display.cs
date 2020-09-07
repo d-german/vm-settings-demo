@@ -1,4 +1,4 @@
-﻿namespace VmSettingsAPI.models
+﻿namespace VmSettingsAPI.Models
 {
     public class Display
     {
